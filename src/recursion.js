@@ -34,11 +34,52 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  if 
+
+  if (array.length === 0) {
+    return 0;
+  }
+
+  var sum = 0
+  
+  for (var i = 0; i <array.length; i++) { //loop for check array
+    
+    if (array[i] instanceof Array) { 
+      
+      sum = parseInt(sum) + arraySum(array[i]);// recursion
+    } 
+    if (typeof(array[i]) === 'number') {
+      
+      sum = parseInt(sum) + array[i];
+    }
+  }
+  return sum;
+  
+  
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  
+  if (n < 0) {
+   n = Math.abs(n);
+  }
+  console.log(n);
+
+  if (n === 0) {
+    var bool = true;
+  } else if (n === 1) {
+  
+    var bool = false;
+  }
+
+  //return boolean
+  if (n > 1) {
+    return isEven(n - 2);
+  }
+  
+  
+  
+  return bool;
 };
 
 // 5. Sum all integers below a given integer.
