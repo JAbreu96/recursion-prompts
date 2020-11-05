@@ -136,7 +136,7 @@ var range = function(x, y) {
 var exponent = function(base, exp) {
   //optimization;
   if (base < 0) {
-    base += base * 2;
+    base += base * -2;
   }
 
   if (exp < 0) {
@@ -161,9 +161,16 @@ var exponent = function(base, exp) {
     //return base * (base, exp - 1);
 
   if (exp > 1) {
-    return base = base * exponent(base, exp - 1);
+    base = base * exponent(base, exp - 1);
   }
-  console.log(base);
+  
+  //check for float
+  if (base % 2 > 0 && base % 2 < 1) {
+    // used toFixed to the round round off a decimal to the 6th place, parseFloat it then return on the same line.
+    return parseFloat(base.toFixed(6)); 
+  }
+
+  
   // 3 return base
   return base;
 };
