@@ -255,6 +255,31 @@ var rMap = function(array, callback) {
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+  
+
+  //check if object is and object
+    //if true we iterate using for in
+      //within iteration we check if 'r' exists within the object as a key, Not a value
+        // we count ++ if that is true
+      //check if key is a object
+        // we will increment count to be added by the recursion
+
+  //the completion of object iteration is the completion of the base case.
+
+  var count = 0;
+
+  for (var objKey in obj) {
+    var val = obj[objKey];
+    if (objKey === key) {
+      count++;
+    }
+    if (typeof val === 'object') {
+      count += countKeysInObj(val, key);
+    }
+  }
+
+
+  return count;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
