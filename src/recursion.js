@@ -31,6 +31,8 @@ var sum = function(array) {
   
 };
 
+
+//Important!!!!
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
@@ -53,8 +55,6 @@ var arraySum = function(array) {
     }
   }
   return sum;
-  
-  
 };
 
 // 4. Check if a number is even.
@@ -63,22 +63,18 @@ var isEven = function(n) {
   if (n < 0) {
    n = Math.abs(n);
   }
-  console.log(n);
-
+  //return boolean
   if (n === 0) {
     var bool = true;
   } else if (n === 1) {
   
     var bool = false;
   }
-
-  //return boolean
+  //recursion
   if (n > 1) {
     return isEven(n - 2);
   }
-  
-  
-  
+
   return bool;
 };
 
@@ -86,11 +82,50 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  //BaseCase
+  if (n === 0) {
+    return 0;
+  }
+  //set sum to equal to 0
+  var sum = 0;
+
+  //determines if n is negative or postive
+  if (n > 0) {
+    sum = n - 1 + sumBelow(n - 1);
+  }
+
+  if (n < 0) {
+    sum = n + 1 + sumBelow(n + 1);
+  }
+
+  return sum;
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  //empty array.
+  var intArr = [];
+
+  //determine if range is in reverse or not
+  if (x > y) {
+    var climb = -1;
+  } else {
+    var climb = 1;
+  }
+
+  //edgecase // if x is equal to y then there numbers between both values do not exist
+  if (x === y) {
+    return [];
+  }
+
+  //basecase // in the case that x reaches y with each recursion we will pass an empty array
+  if (x === y - climb) {
+    return intArr;
+  }
+
+  //recursive case // if x is less or more than y we will return intArray with a concatination of both x + climb and recursive function with parameters (x + climb and y).
+  return intArr.concat(x + climb, range(x + climb, y));
 };
 
 // 7. Compute the exponent of a number.
@@ -99,6 +134,38 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  //optimization;
+  if (base < 0) {
+    base += base * 2;
+  }
+
+  if (exp < 0) {
+    exp += exp * -2;
+    base = 1/base;
+  }
+
+  // 1. includes base case,
+  //if exp is zero: return 1;
+  if (exp === 0) {
+    return 1;
+  }
+
+  // 2. if exp === 1 return base
+  if (exp === 1) {
+    return base;
+  }
+
+  // 3. includes recursion case
+  //if exp > 1:
+
+    //return base * (base, exp - 1);
+
+  if (exp > 1) {
+    return base = base * exponent(base, exp - 1);
+  }
+  console.log(base);
+  // 3 return base
+  return base;
 };
 
 // 8. Determine if a number is a power of two.
